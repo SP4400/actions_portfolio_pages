@@ -2,10 +2,12 @@ name: deploy on github pages
 on:
     push:
         branches:
-            -main
+            - main
     pull_request:
         branches:
             - main
+    workflow_dispatch:
+        
 permissions:
     contents: read
     pages: write
@@ -33,4 +35,3 @@ jobs:
               uses: actions/deploy-pages@v4
               with:
                 token: ${{ secrets.GITHUB_TOKEN}}
-                
