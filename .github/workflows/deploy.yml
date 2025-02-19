@@ -1,0 +1,36 @@
+name: deploy on github pages
+on:
+    push:
+        branches:
+            -main
+    pull_request:
+        branches:
+            - main
+permissions:
+    contents: read
+    pages: write
+    id-token: write
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: get code to runner with checkout
+              uses: actions/checkout@v4
+            - name: setup node
+              uses: actions/setup-node@v4
+              with:
+                node-version: 20
+            - name: install dependencies
+              run: npm ci
+            - name: build app
+              run: npm run build 
+            - name: upload artifacts
+              uses: actions/upload-pages-artifact@v3
+              with: 
+                name: 'github-pages'
+                path: build
+            - name: deploy to giithub pages
+              uses: actions/deploy-pages@v4
+              with:
+                token: ${{ secrets.GITHUB_TOKEN}}
+                
