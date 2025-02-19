@@ -7,7 +7,7 @@ on:
         branches:
             - main
     workflow_dispatch:
-        
+
 permissions:
     contents: read
     pages: write
@@ -26,6 +26,8 @@ jobs:
               run: npm ci
             - name: build app
               run: npm run build 
+            - name: Debug - Check Build Directory
+              run: ls -lah && ls -lah build/
             - name: upload artifacts
               uses: actions/upload-pages-artifact@v3
               with: 
