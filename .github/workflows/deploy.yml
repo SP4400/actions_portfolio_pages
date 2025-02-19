@@ -27,7 +27,7 @@ jobs:
             - name: build app
               run: npm run build 
             - name: Debug - Check Build Directory
-              run: ls -lah && ls -lah build/
+              run: ls -lah && ls -lah dist/
             - name: upload artifacts
               uses: actions/upload-pages-artifact@v3
               with: 
